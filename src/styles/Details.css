@@ -1,0 +1,60 @@
+@import url('https://fonts.cdnfonts.com/css/gill-sans');
+
+body {
+  font-family: 'Gill Sans', sans-serif;
+}
+
+.details-heading {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background-color: #f95091;
+  color: #fff;
+  justify-content: center;
+  text-align: center;
+}
+
+.details-main-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5%;
+  padding-right: 5%;
+  background-color: #ec4c8a;
+  color: #fff;
+}
+
+.composition-container {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.composition-item {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 5%;
+  width: 90%;
+}
+
+.composition-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  color: #fff;
+}
+
+.composition-list:nth-child(odd) {
+  background-color: #ea4a87;
+}
+
+.composition-list:nth-child(even) {
+  background-color: #cc4176;
+}
