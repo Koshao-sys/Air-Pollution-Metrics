@@ -10,7 +10,7 @@ export const fetchLocations = createAsyncThunk('location/fetchLocations', async 
   const cities = ['London', 'Moscow', 'Chelsea', 'Berlin', 'Rome', 'Madrid'];
   try {
     const requests = cities.map(async (city) => {
-      const url = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=4039c600924d48653fbb835bff5d1580`;
+      const url = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=4039c600924d48653fbb835bff5d1580`;
       const resp = await fetch(url);
       return resp.json();
     });

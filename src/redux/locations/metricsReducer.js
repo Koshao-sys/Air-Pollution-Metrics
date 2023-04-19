@@ -8,7 +8,7 @@ const initialState = {
 export const fetchMetrics = createAsyncThunk('location/fetchMetrics', async (locs) => {
   try {
     const requests = locs.map(async (coordinate) => {
-      const url = `http://api.openweathermap.org/data/2.5/air_pollution/forecast?lat=${coordinate.lat}&lon=${coordinate.lon}&appid=4039c600924d48653fbb835bff5d1580`;
+      const url = `https://api.openweathermap.org/data/2.5/air_pollution/forecast?lat=${coordinate.lat}&lon=${coordinate.lon}&appid=4039c600924d48653fbb835bff5d1580`;
       const resp = await fetch(url);
       return resp.json();
     });
