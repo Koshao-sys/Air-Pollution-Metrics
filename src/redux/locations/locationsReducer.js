@@ -1,6 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
-import { fetchMetrics } from './metricsReducer';
 
 const initialState = {
   locations: [],
@@ -8,20 +6,19 @@ const initialState = {
   error: '',
 };
 
-export const fetchLocations = createAsyncThunk('location/fetchLocations', async (_, thunkAPI) => {
+export const fetchLocations = createAsyncThunk('location/fetchLocations', async () => {
   const cities = ['London', 'Moscow', 'Chelsea', 'Berlin', 'Rome', 'Madrid'];
   try {
     const requests = cities.map(async (city) => {
       const url = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=4039c600924d48653fbb835bff5d1580`;
-      const resp = await axios(url);
-      return resp.data;
+      const resp = await fetch(url);
+      return resp.json();
     });
     const results = await Promise.all(requests);
     const locs = results.flat();
-    thunkAPI.dispatch(fetchMetrics(locs));
     return locs;
   } catch (error) {
-    return thunkAPI.rejectWithValue('There was an error...');
+    return error;
   }
 });
 
@@ -47,10 +44,11 @@ const locationsReducer = createSlice({
           state: location.state,
         })
       ));
-      return { ...state, locations: newPayload };
+      return { ...state, isLoading: false, locations: newPayload };
     });
     builder.addCase(fetchLocations.rejected, (state, { payload }) => ({
       ...state,
+      isLoading: false,
       error: payload,
     }));
   },

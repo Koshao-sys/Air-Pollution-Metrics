@@ -8,15 +8,17 @@ import Home from './components/Home';
 import Details from './components/Details';
 
 const App = () => {
-  const { isLoading } = useSelector((store) => store.metric);
+  const { locations, isLoading } = useSelector((store) => store.location);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchLocations());
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(fetchMetrics());
-  }, [dispatch]);
+    if (locations.length) {
+      dispatch(fetchMetrics(locations));
+    }
+  }, [locations, dispatch]);
 
   if (isLoading) {
     return (

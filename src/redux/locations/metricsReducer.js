@@ -1,23 +1,22 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit/dist';
-import axios from 'axios';
 
 const initialState = {
   metrics: [],
   isLoading: true,
 };
 
-export const fetchMetrics = createAsyncThunk('location/fetchMetrics', async (locs, thunkAPI) => {
+export const fetchMetrics = createAsyncThunk('location/fetchMetrics', async (locs) => {
   try {
     const requests = locs.map(async (coordinate) => {
       const url = `http://api.openweathermap.org/data/2.5/air_pollution/forecast?lat=${coordinate.lat}&lon=${coordinate.lon}&appid=4039c600924d48653fbb835bff5d1580`;
-      const resp = await axios(url);
-      return resp.data;
+      const resp = await fetch(url);
+      return resp.json();
     });
     const results = await Promise.all(requests);
     const coords = results.flat();
     return coords;
   } catch (error) {
-    return thunkAPI.rejectWithValue('There was an error...');
+    return error;
   }
 });
 
