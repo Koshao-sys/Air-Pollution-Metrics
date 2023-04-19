@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
+import './styles/spinner.css';
+import { fetchLocations } from './redux/locations/locationsReducer';
+import { fetchMetrics } from './redux/locations/metricsReducer';
+import Home from './components/Home';
+import Details from './components/Details';
 
-function App() {
+const App = () => {
+  const { locations, isLoading } = useSelector((store) => store.location);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchLocations());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (locations.length) {
+      dispatch(fetchMetrics(locations));
+    }
+  }, [locations, dispatch]);
+
+  if (isLoading) {
+    return (
+      <div className="spinner-container">
+        <div className="loading-spinner" />
+      </div>
+    );
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/metrics" element={<Details />} />
+      </Routes>
+    </>
   );
-}
+};
 
 export default App;

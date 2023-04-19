@@ -1,0 +1,58 @@
+body {
+  margin: 0;
+  background-color: #ea4a87;
+}
+
+.locations-container {
+  display: grid;
+  grid-template-rows: auto auto auto;
+  grid-template-columns: auto auto;
+  padding: 0;
+  margin: 0;
+  color: #fff;
+}
+
+.europe-img {
+  background-image: url(./assets/europe.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 100px;
+  height: 100px;
+}
+
+.location-item {
+  list-style: none;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 60px;
+}
+
+.location-item:nth-child(odd) {
+  background-color: #ea4a87;
+}
+
+.location-item:nth-child(even) {
+  background-color: #cc4176;
+}
+
+.location-item:nth-child(4n-1) {
+  background-color: #cc4176;
+}
+
+.location-item:nth-child(3n-2) {
+  background-color: #ea4a87;
+}
+
+.next-page {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.location-cordinates {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+}
